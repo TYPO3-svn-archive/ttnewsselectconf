@@ -1,0 +1,19 @@
+0.1.2
+  10-12-28
+  Improvement: The manual is extended with the sample "Display news of the current day only"
+               Thanks to Michael Lang (http://www.mediadesign-ffm.de)
+
+0.1.1
+  09-10-12
+  Development: The andWhere clause gots the stdWrap property
+
+0.0.3
+  09-03-07
+  Status: Changing from alpha to stable
+  Bugfixing: Manual
+  Corporate Design: Changing from think visually to Die Netzmacher
+  
+0.0.1
+  09-01-18
+  Initial release
+  Dirk Wildt  <wildt(at)die-netzmacher.de>
