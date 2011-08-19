@@ -53,20 +53,29 @@ class tx_ttnewsselectconf {
  * @return	array
  */
   function processSelectConfHook($parentObject, $selectConf) {
+    $extConf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf'][$this->extKey]);
+    $conf    = $parentObject->conf;
+    $newconf = $conf['extensions.']['ttnews_selectconf.'];
 
-    $conf     = $parentObject->conf;
-	$newconf = $conf['extensions.']['ttnews_selectconf.'];
+    if (is_array($newconf)) {
+      foreach($newconf as $key=>$value) {
+        if(strpos($key,'.')) {
+          $keywithoutperiod=substr($key,0,-1);
+          $selectConf[$keywithoutperiod] = trim($parentObject->cObj->stdWrap($newconf[$keywithoutperiod]?$newconf[$keywithoutperiod]:$selectConf[$keywithoutperiod],$value));
+        } else {
+          $selectConf[$key]=$value;
+        }
+      }
+    }
 
-	if (is_array($newconf)) {
-		foreach($newconf as $key=>$value) {
-			if(strpos($key,'.')) {
-				$keywithoutperiod=substr($key,0,-1);
-				$selectConf[$keywithoutperiod] = trim($parentObject->cObj->stdWrap($newconf[$keywithoutperiod]?$newconf[$keywithoutperiod]:$selectConf[$keywithoutperiod],$value));
-			} else {
-				$selectConf[$key]=$value;
-			}
-		}
-	}
+      //  using tt_news 3.x?
+      // #29111: tt_news 3.x doesnt't maintain 'andWhere' any longer
+      // append it to 'where' instead
+    if (empty ($extConf['compatVersion25']) AND !empty ($selectConf['andWhere'])) {
+      $selectConf['where'] .= ' AND ' . $selectConf['andWhere'];
+      unset($selectConf['andWhere']);
+    }
+
     #var_dump($selectConf);
     /*
       array(3) {
@@ -78,7 +87,7 @@ class tx_ttnewsselectconf {
         string(56) "tt_news_cat_mm ON tt_news.uid = tt_news_cat_mm.uid_local"
       }
     */
-	return $selectConf;
+    return $selectConf;
   }
 
 
