@@ -68,10 +68,12 @@ class tx_ttnewsselectconf {
       }
     }
 
-      //  using tt_news 3.x?
-      // #29111: tt_news 3.x doesnt't maintain 'andWhere' any longer
-      // append it to 'where' instead
-    if (empty ($extConf['compatVersion25']) AND !empty ($selectConf['andWhere'])) {
+
+      // Major Feature#29111: tt_news 3.x doesnt't maintain 'andWhere' any longer
+    $compatMode = $this->_checkTtnewsVersion();
+      // using tt_news 3.x?
+    if ($ttnewsMajorVersion != 2) {
+        // append it to 'where' instead
       $selectConf['where'] .= ' AND ' . $selectConf['andWhere'];
       unset($selectConf['andWhere']);
     }
@@ -90,9 +92,21 @@ class tx_ttnewsselectconf {
     return $selectConf;
   }
 
+  /**
+ * Detect need of compatibility mode for tt_news 3.x
+ *
+ * @return	int  tt_news major version
+ * @since 0.2.0
+ */
+  private function _checkTtnewsVersion() {
+      //  needed in ext_emconf.php already
+	$_EXTKEY = 'tt_news';
+	  //  don't use include_once / require_once
+    include t3lib_extMgm::extPath($_EXTKEY, 'ext_emconf.php');
+    $ttnewsMajorVersion = (int)$EM_CONF[$_EXTKEY]['version'];
 
-
-
+    return $ttnewsMajorVersion;
+  }
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/ttnews_selectconf/class.tx_ttnewsselectconf.php']) {

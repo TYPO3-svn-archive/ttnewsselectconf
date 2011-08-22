@@ -1,2 +1,0 @@
-	# cat=basic//10; type=boolean; label= Compatibility mode: Check it if you are using tt_news version 2.5.* yet
-compatVersion25 = 0
