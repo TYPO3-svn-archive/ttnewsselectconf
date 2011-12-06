@@ -22,6 +22,8 @@
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
+require_once t3lib_extMgm::extPath('em') . 'classes/tools/class.tx_em_tools.php';
+
 /**
  * [CLASS/FUNCTION INDEX of SCRIPT]
  *
@@ -53,7 +55,7 @@ class tx_ttnewsselectconf {
  * @return	array
  */
   function processSelectConfHook($parentObject, $selectConf) {
-    $extConf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf'][$this->extKey]);
+##  $extConf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf'][$this->extKey]);
     $conf    = $parentObject->conf;
     $newconf = $conf['extensions.']['ttnews_selectconf.'];
 
@@ -70,7 +72,7 @@ class tx_ttnewsselectconf {
 
 
       // Major Feature#29111: tt_news 3.x doesnt't maintain 'andWhere' any longer
-    $compatMode = $this->_checkTtnewsVersion();
+    $ttnewsMajorVersion = $this->_checkTtnewsVersion();
       // using tt_news 3.x?
     if ($ttnewsMajorVersion != 2) {
         // append it to 'where' instead
@@ -100,10 +102,11 @@ class tx_ttnewsselectconf {
  */
   private function _checkTtnewsVersion() {
       //  needed in ext_emconf.php already
-	$_EXTKEY = 'tt_news';
-	  //  don't use include_once / require_once
-    include t3lib_extMgm::extPath($_EXTKEY, 'ext_emconf.php');
-    $ttnewsMajorVersion = (int)$EM_CONF[$_EXTKEY]['version'];
+    $_EXTKEY = 'tt_news';
+    $path    = t3lib_extMgm::extPath($_EXTKEY);
+      //  uherrmann, 111206: FIX #32334
+    $EM_CONF = tx_em_Tools::includeEMCONF($path . '/ext_emconf.php', $_EXTKEY);
+    $ttnewsMajorVersion = (int)$EM_CONF['version'];
 
     return $ttnewsMajorVersion;
   }

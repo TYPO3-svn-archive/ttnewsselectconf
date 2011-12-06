@@ -1,3 +1,11 @@
+0.2.2
+  11-12-06
+  Bugfixing: issue #32334 - Automatic detection of tt_news version fails in some cases
+
+0.2.1
+  11-08-23
+  Bugfixing: Misspelled variable name
+
 0.2.0
   11-08-19
   Development: Feature #29111 - compatibility to tt_news 3.0.*
