@@ -22,8 +22,6 @@
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
-require_once t3lib_extMgm::extPath('em') . 'classes/tools/class.tx_em_tools.php';
-
 /**
  * [CLASS/FUNCTION INDEX of SCRIPT]
  *
@@ -39,7 +37,7 @@ require_once t3lib_extMgm::extPath('em') . 'classes/tools/class.tx_em_tools.php'
 class tx_ttnewsselectconf {
 
   var $prefixId      = 'tx_ttnewsselectconf';   // Same as class name
-  var $scriptRelPath = 'class.tx_ttnewsselectconf.php'; // Path to this script relative to the extension dir.
+  var $scriptRelPath = 'lib/class.tx_ttnewsselectconf.php'; // Path to this script relative to the extension dir.
   var $extKey        = 'ttnews_selectconf'; // The extension key.
 
 
@@ -47,7 +45,7 @@ class tx_ttnewsselectconf {
 
 
 
-  /**
+/**
  * Generating own markers by call of the hook in tt_news
  *
  * @param	array		$parentObject: tt_news object
@@ -55,7 +53,7 @@ class tx_ttnewsselectconf {
  * @return	array
  */
   function processSelectConfHook($parentObject, $selectConf) {
-##  $extConf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf'][$this->extKey]);
+    $extConf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf'][$this->extKey]);
     $conf    = $parentObject->conf;
     $newconf = $conf['extensions.']['ttnews_selectconf.'];
 
@@ -70,12 +68,10 @@ class tx_ttnewsselectconf {
       }
     }
 
-
-      // Major Feature#29111: tt_news 3.x doesnt't maintain 'andWhere' any longer
-    $ttnewsMajorVersion = $this->_checkTtnewsVersion();
       // using tt_news 3.x?
-    if ($ttnewsMajorVersion != 2) {
-        // append it to 'where' instead
+      // #29111: tt_news 3.x doesnt't maintain 'andWhere' any longer
+      // append it to 'where' instead
+    if (empty ($extConf['compatVersion25']) AND !empty ($selectConf['andWhere'])) {
       $selectConf['where'] .= ' AND ' . $selectConf['andWhere'];
       unset($selectConf['andWhere']);
     }
@@ -94,22 +90,9 @@ class tx_ttnewsselectconf {
     return $selectConf;
   }
 
-  /**
- * Detect need of compatibility mode for tt_news 3.x
- *
- * @return	int  tt_news major version
- * @since 0.2.0
- */
-  private function _checkTtnewsVersion() {
-      //  needed in ext_emconf.php already
-    $_EXTKEY = 'tt_news';
-    $path    = t3lib_extMgm::extPath($_EXTKEY);
-      //  uherrmann, 111206: FIX #32334
-    $EM_CONF = tx_em_Tools::includeEMCONF($path . '/ext_emconf.php', $_EXTKEY);
-    $ttnewsMajorVersion = (int)$EM_CONF['version'];
 
-    return $ttnewsMajorVersion;
-  }
+
+
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/ttnews_selectconf/class.tx_ttnewsselectconf.php']) {

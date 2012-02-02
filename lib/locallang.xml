@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+	<meta type="array">
+		<type>module</type>
+		<description>Language labels for plugin „tx_ttnews_selectconf_extmanager”</description>
+	</meta>
+	<data type="array">
+		<languageKey index="default" type="array">
+			<label index="labelCompatVersion25">Compatibility Mode: Check it if you are using tt_news version 2.5.* yet</label>
+			<label index="labelCompatVersionCheck">Compatibility Mode: Configuration Check</label>
+
+			<label index="promptDependencyError"><![CDATA[<b>tt_news</b> is not installed.<br />
+					Please install it first!]]></label>
+			<label index="promptNoAutomatic"><![CDATA[ttnews_selectconf could not recognize the installed version of tt_news automatically.<br />
+					Please check the need of Compatibility mode careful!]]></label>
+			<label index="promptCompatModeNeeded"><![CDATA[You are using tt_news version 2.5 or higher.<br />
+					Please activate the Compatibility mode!]]></label>
+			<label index="promptCompatModeNotNeeded"><![CDATA[You are using tt_news version 3.0 or higher<br />
+					Please deactivate the Compatibility mode!]]></label>
+			<label index="promptCompatModeOk"><![CDATA[Your Compatibility mode configuration is ok.]]></label>
+		</languageKey>
+		
+		<languageKey index="de" type="array">
+			<label index="labelCompatVersion25"><![CDATA[Kompatibilitätsmodus: Aktivieren, wenn Du tt_news noch in Version 2.5.* benutzt]]></label>
+			<label index="labelCompatVersionCheck"><![CDATA[Kompatibilitätsmodus: Prüfung der Konfiguration]]></label>
+
+			<label index="promptDependencyError"><![CDATA[<b>tt_news</b> ist nicht installiert.<br />
+					Bitte zuerst installieren!]]></label>
+			<label index="promptNoAutomatic"><![CDATA[ttnews_selectconf konnte die installierte Version von tt_news nicht automatisch erkennen.<br />
+					Bitte prüfe die Notwendigkeit des Kompatibilitätsmodus sorgfältig!]]></label>
+			<label index="promptCompatModeNeeded"><![CDATA[Du benutzt tt_news in Version 2.5 oder höher.<br />
+					Bitte aktiviere den Kompatibilitätsmodus!]]></label>
+			<label index="promptCompatModeNotNeeded"><![CDATA[Du benutzt tt_news in Version 3.0 oder höher.<br />
+					Bitte deaktiviere den Kompatibilitätsmodus!]]></label>
+			<label index="promptCompatModeOk"><![CDATA[Die Konfiguration für den Kompatibilitätsmodus ist OK.]]></label>
+		</languageKey>
+
+	</data>
+</T3locallang>

@@ -1,3 +1,7 @@
+0.2.3
+  12-02-02
+  Bugfixing: issue #33578 - Automatic detection of tt_news version replaced by manual detection
+
 0.2.2
   11-12-06
   Bugfixing: issue #32334 - Automatic detection of tt_news version fails in some cases
@@ -24,7 +28,7 @@
   Status: Changing from alpha to stable
   Bugfixing: Manual
   Corporate Design: Changing from think visually to Die Netzmacher
-  
+
 0.0.1
   09-01-18
   Initial release

@@ -1,0 +1,4 @@
+	# cat=basic//10; type=boolean; label=LLL:EXT:ttnews_selectconf/lib/locallang.xml:labelCompatVersion25
+compatVersion25 = 0
+	# cat=basic//20; type=user[EXT:ttnews_selectconf/lib/class.tx_ttnews_selectconf_extmanager.php:tx_ttnews_selectconf_extmanager->compatVersionCheck]; label=LLL:EXT:ttnews_selectconf/lib/locallang.xml:labelCompatVersionCheck
+compatVersionCheck = 0
