@@ -1,6 +1,7 @@
 0.2.3
   12-02-02
   Bugfixing: issue #33578 - Automatic detection of tt_news version replaced by manual detection
+							Processing only if there is an andWhere configured
 
 0.2.2
   11-12-06
